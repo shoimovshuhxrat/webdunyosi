@@ -1,11 +1,1947 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Hello</h1>
-</body>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>So'rovEdu - Premium Ta'lim Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#eef2ff",
+                100: "#e0e7ff",
+                200: "#c7d2fe",
+                300: "#a5b4fc",
+                400: "#818cf8",
+                500: "#6366f1",
+                600: "#4f46e5",
+                700: "#4338ca",
+                800: "#3730a3",
+                900: "#312e81",
+                950: "#1e1b4b",
+              },
+              secondary: {
+                50: "#fdf4ff",
+                100: "#fae8ff",
+                200: "#f5d0fe",
+                300: "#f0abfc",
+                400: "#e879f9",
+                500: "#d946ef",
+                600: "#c026d3",
+                700: "#a21caf",
+                800: "#86198f",
+                900: "#701a75",
+                950: "#4a044e",
+              },
+              dark: { 800: "#1e1e2f", 900: "#0f0f1a", 950: "#070711" },
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              shimmer: "shimmer 2s linear infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              shimmer: {
+                "0%": { backgroundPosition: "-1000px 0" },
+                "100%": { backgroundPosition: "1000px 0" },
+              },
+            },
+            backgroundImage: {
+              "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .gradient-text {
+        background: linear-gradient(to right, #4f46e5, #d946ef);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .gradient-border {
+        position: relative;
+        border-radius: 0.75rem;
+        background: linear-gradient(to right, #4f46e5, #d946ef);
+        padding: 1px;
+      }
+
+      .gradient-border-content {
+        border-radius: 0.7rem;
+        background: #0f0f1a;
+        height: 100%;
+      }
+
+      .glass-card {
+        background: rgba(30, 30, 47, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .shimmer {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.08) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite linear;
+      }
+
+      .hero-gradient {
+        background: radial-gradient(circle at 50% 50%, #1e1e2f 0%, #0f0f1a 70%);
+      }
+
+      .feature-gradient {
+        background: linear-gradient(135deg, #0f0f1a 0%, #1e1e2f 100%);
+      }
+
+      .pricing-gradient {
+        background: radial-gradient(circle at 50% 0%, #1e1e2f 0%, #0f0f1a 70%);
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background: linear-gradient(to right, #4f46e5, #d946ef);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .btn-gradient {
+        background: linear-gradient(to right, #4f46e5, #d946ef);
+        transition: all 0.3s ease;
+      }
+
+      .btn-gradient:hover {
+        background: linear-gradient(to right, #4338ca, #c026d3);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-2px);
+      }
+
+      .feature-card {
+        transition: all 0.5s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px -15px rgba(79, 70, 229, 0.3);
+      }
+
+      .feature-icon {
+        background: linear-gradient(135deg, #4f46e5 0%, #d946ef 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .pricing-card {
+        transition: all 0.5s ease;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-10px) scale(1.02);
+      }
+
+      .pricing-popular {
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1) 0%,
+          rgba(217, 70, 239, 0.1) 100%
+        );
+        border: 1px solid rgba(79, 70, 229, 0.2);
+      }
+
+      .form-input {
+        background: rgba(30, 30, 47, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+      }
+
+      .modal-animation {
+        animation: modalFade 0.3s ease-out forwards;
+      }
+
+      @keyframes modalFade {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .success-animation {
+        animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+      }
+
+      @keyframes successPop {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Animated background */
+      .animated-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .animated-bg-shape {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.15) 0%,
+          rgba(217, 70, 239, 0.15) 100%
+        );
+        filter: blur(60px);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #0f0f1a;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #4f46e5, #d946ef);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #4338ca, #c026d3);
+      }
+
+      /* Sidebar styles */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background-color: #1e1e2f;
+        z-index: 1000;
+        overflow-y: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+
+      .sidebar-header {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-menu {
+        padding: 0.5rem 0;
+      }
+
+      .sidebar-menu-item {
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        transition: background-color 0.2s ease;
+      }
+
+      .sidebar-menu-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-menu-item.active {
+        background-color: rgba(79, 70, 229, 0.2);
+        border-left: 3px solid #6366f1;
+      }
+
+      .sidebar-menu-item i {
+        margin-right: 0.75rem;
+        font-size: 1.25rem;
+      }
+
+      .sidebar-submenu {
+        padding-left: 1rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .sidebar-submenu.open {
+        max-height: 500px;
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+      }
+
+      .sidebar-toggle {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        background-color: #1e1e2f;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+        display: none;
+        cursor: pointer;
+      }
+
+      .content-with-sidebar {
+        margin-left: 250px;
+        transition: margin-left 0.3s ease;
+      }
+
+      .content-full {
+        margin-left: 0;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+        }
+
+        .sidebar-visible {
+          transform: translateX(0);
+        }
+
+        .sidebar-toggle {
+          display: block;
+        }
+
+        .content-with-sidebar {
+          margin-left: 0;
+        }
+
+        .sidebar-overlay.visible {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-dark-950 text-white min-h-screen flex flex-col">
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <button id="sidebarToggle" class="sidebar-toggle">
+      <i class="bx bx-menu text-2xl"></i>
+    </button>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="flex items-center">
+          <div
+            class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mr-2"
+          >
+            <span class="text-black font-bold">JS</span>
+          </div>
+          <h2 class="text-xl font-bold text-white">Front-end</h2>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="#" class="sidebar-menu-item">
+          <i class="bx bx-home-alt text-blue-400"></i> <span>Home</span>
+        </a>
+        <a href="#" class="sidebar-menu-item">
+          <i class="bx bx-log-in text-green-400"></i> <span>KIRISH</span>
+        </a>
+        <a href="#" class="sidebar-menu-item">
+          <i class="bx bx-video text-blue-400"></i>
+          <span>Vidieo darslardan foydalanish va kurs haqida</span>
+        </a>
+        <a href="#" class="sidebar-menu-item">
+          <i class="bx bx-lock text-blue-400"></i>
+          <span>Yopiq guruhga kirish</span>
+        </a>
+        <a href="#" class="sidebar-menu-item">
+          <i class="bx bx-code-alt text-orange-400"></i>
+          <span>HTML TO'LIQ KURS</span>
+        </a>
+        <a href="#" class="sidebar-menu-item">
+          <i class="bx bx-book text-blue-400"></i>
+          <span>Samarali dars qilish</span>
+        </a>
+
+        <div class="sidebar-menu-item" id="darslarToggle">
+          <i class="bx bx-book-open text-purple-400"></i>
+          <span>Darslar</span>
+          <i class="bx bx-chevron-down ml-auto"></i>
+        </div>
+        <div class="sidebar-submenu" id="darslarSubmenu">
+          <a href="#" class="sidebar-menu-item">
+            <span>1-dars | Kirish</span>
+          </a>
+          <a href="#" class="sidebar-menu-item">
+            <span>2-dars | HTML haqida</span>
+          </a>
+          <a href="#" class="sidebar-menu-item">
+            <span>3-dars. Hujjatni formatlash</span>
+          </a>
+          <a href="#" class="sidebar-menu-item">
+            <span>4-dars | Taglar haqida batafsi</span>
+          </a>
+          <a href="#" class="sidebar-menu-item">
+            <span>5-dars | Attributlar haqida batafsi</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+    <!-- Sidebar Overlay (Mobile) -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+    <!-- Main Content -->
+    <div id="mainContent" class="content-with-sidebar">
+      <div class="animated-bg">
+        <div
+          class="animated-bg-shape"
+          style="top: 10%; left: 5%; width: 500px; height: 500px; opacity: 0.5"
+        ></div>
+        <div
+          class="animated-bg-shape"
+          style="
+            top: 40%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            opacity: 0.4;
+          "
+        ></div>
+        <div
+          class="animated-bg-shape"
+          style="
+            bottom: 10%;
+            left: 20%;
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+          "
+        ></div>
+      </div>
+
+      <header
+        class="sticky top-0 z-50 backdrop-blur-xl bg-dark-950/80 border-b border-white/5"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center"
+              >
+                <i class="bx bx-food-menu text-white"></i>
+              </div>
+              <a href="#" class="text-lg font-semibold gradient-text"
+                >So'rovEdu</a
+              >
+            </div>
+
+            <div class="md:hidden">
+              <button id="menuToggle" class="text-white p-2 focus:outline-none">
+                <i class="bx bx-menu text-2xl"></i>
+              </button>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8">
+              <a
+                href="#features"
+                class="nav-link text-gray-300 hover:text-white transition-colors duration-300"
+                >Xususiyatlar</a
+              >
+              <a
+                href="#pricing"
+                class="nav-link text-gray-300 hover:text-white transition-colors duration-300"
+                >Narxlar</a
+              >
+              <a
+                href="#resources"
+                class="nav-link text-gray-300 hover:text-white transition-colors duration-300"
+                >Resurslar</a
+              >
+              <a
+                href="#contact"
+                class="nav-link text-gray-300 hover:text-white transition-colors duration-300"
+                >Aloqa</a
+              >
+            </nav>
+            <div class="hidden md:flex items-center space-x-4">
+              <button
+                id="loginBtn"
+                class="text-gray-300 hover:text-white transition-colors duration-300"
+              >
+                Kirish
+              </button>
+              <button
+                id="registerBtn"
+                class="btn-gradient px-5 py-2 rounded-full text-white font-medium"
+              >
+                Ro'yxatdan o'tish
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="mobileMenu"
+          class="hidden px-4 pt-2 pb-4 bg-dark-900/90 backdrop-blur-xl border-b border-white/5"
+        >
+          <nav class="flex flex-col space-y-3">
+            <a
+              href="#features"
+              class="py-2 text-gray-300 hover:text-white transition-colors duration-300"
+              >Xususiyatlar</a
+            >
+            <a
+              href="#pricing"
+              class="py-2 text-gray-300 hover:text-white transition-colors duration-300"
+              >Narxlar</a
+            >
+            <a
+              href="#resources"
+              class="py-2 text-gray-300 hover:text-white transition-colors duration-300"
+              >Resurslar</a
+            >
+            <a
+              href="#contact"
+              class="py-2 text-gray-300 hover:text-white transition-colors duration-300"
+              >Aloqa</a
+            >
+          </nav>
+          <div class="pt-4 space-y-2">
+            <button
+              id="mobileLoginBtn"
+              class="w-full text-left py-2 text-gray-300 hover:text-white transition-colors duration-300"
+            >
+              Kirish
+            </button>
+            <button
+              id="mobileRegisterBtn"
+              class="w-full btn-gradient px-4 py-2 rounded-full text-white font-medium"
+            >
+              Ro'yxatdan o'tish
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="flex-grow">
+        <section class="hero-gradient overflow-hidden relative">
+          <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10"
+          >
+            <div
+              class="flex flex-col lg:flex-row items-center justify-between gap-16"
+            >
+              <div class="w-full lg:w-1/2">
+                <div class="space-y-6">
+                  <span
+                    class="inline-block px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800"
+                  >
+                    #1 Ta'lim So'rovnoma Platformasi
+                  </span>
+                  <h1
+                    class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                  >
+                    Dars mazmunini
+                    <span class="gradient-text">baholash</span> uchun onlayn
+                    so'rov vositasi
+                  </h1>
+                  <p class="text-lg md:text-xl text-gray-300">
+                    Ta'lim mazmuni haqida qimmatli fikr-mulohazalarni to'plash
+                    uchun so'rovnomalar yarating, tarqating va tahlil qiling.
+                    Maxsus o'qituvchilar va ta'lim muassasalari uchun
+                    mo'ljallangan.
+                  </p>
+                  <div class="flex flex-wrap gap-4">
+                    <button
+                      id="heroRegisterBtn"
+                      class="btn-gradient px-8 py-3 rounded-full text-white font-medium"
+                    >
+                      Boshlash
+                    </button>
+                    <button
+                      class="btn-outline px-8 py-3 rounded-full font-medium"
+                    >
+                      Batafsil ma'lumot
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-4 pt-4">
+                    <div class="flex -space-x-2">
+                      <img
+                        src="https://randomuser.me/api/portraits/women/44.jpg"
+                        class="w-8 h-8 rounded-full border-2 border-dark-950"
+                        alt="User"
+                      />
+                      <img
+                        src="https://randomuser.me/api/portraits/men/86.jpg"
+                        class="w-8 h-8 rounded-full border-2 border-dark-950"
+                        alt="User"
+                      />
+                      <img
+                        src="https://randomuser.me/api/portraits/women/24.jpg"
+                        class="w-8 h-8 rounded-full border-2 border-dark-950"
+                        alt="User"
+                      />
+                      <div
+                        class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-xs font-medium border-2 border-dark-950"
+                      >
+                        500+
+                      </div>
+                    </div>
+                    <span class="text-sm text-gray-300"
+                      >500+ ta o'qituvchi ishonadi</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full lg:w-1/2">
+                <div class="relative">
+                  <div
+                    class="absolute -inset-1 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-[2rem] blur-xl opacity-30"
+                  ></div>
+                  <div class="animate-float relative">
+                    <img
+                      src="https://static.akadem.uz/crop/2/1/1200__85_2114936773.jpg?t=1702507567"
+                      alt="So'rovEdu dashboard"
+                      class="rounded-[2rem] shadow-2xl relative z-10 w-full"
+                    />
+                    <div
+                      class="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full blur-xl opacity-50"
+                    ></div>
+                    <div
+                      class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-full blur-xl opacity-50"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-1/4 left-0 w-64 h-64 bg-primary-600 rounded-full filter blur-[120px] opacity-20"
+          ></div>
+          <div
+            class="absolute bottom-1/4 right-0 w-80 h-80 bg-secondary-600 rounded-full filter blur-[120px] opacity-20"
+          ></div>
+        </section>
+
+        <section class="py-16 relative overflow-hidden">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div class="text-center">
+                <h3 class="text-3xl md:text-4xl font-bold gradient-text">
+                  500+
+                </h3>
+                <p class="text-gray-400 mt-2">Ta'lim muassasalari</p>
+              </div>
+              <div class="text-center">
+                <h3 class="text-3xl md:text-4xl font-bold gradient-text">
+                  10K+
+                </h3>
+                <p class="text-gray-400 mt-2">O'qituvchilar</p>
+              </div>
+              <div class="text-center">
+                <h3 class="text-3xl md:text-4xl font-bold gradient-text">
+                  100K+
+                </h3>
+                <p class="text-gray-400 mt-2">So'rovnomalar</p>
+              </div>
+              <div class="text-center">
+                <h3 class="text-3xl md:text-4xl font-bold gradient-text">
+                  1M+
+                </h3>
+                <p class="text-gray-400 mt-2">Javoblar</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Features Section -->
+        <section
+          id="features"
+          class="feature-gradient py-24 relative overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+              <span
+                class="inline-block px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800 mb-4"
+              >
+                XUSUSIYATLAR
+              </span>
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                O'qituvchilar uchun
+                <span class="gradient-text">mo'ljallangan</span> xususiyatlar
+              </h2>
+              <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                Bizning platformamiz samarali so'rovnomalar yaratish va mazmunli
+                fikr-mulohazalarni to'plash uchun zarur barcha vositalarni
+                taqdim etadi.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div class="feature-card glass-card rounded-2xl p-8 h-full">
+                <div class="flex justify-center mb-6 text-5xl feature-icon">
+                  <i class="bx bx-food-menu"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4 text-center">
+                  Oson test yaratish
+                </h3>
+                <p class="text-gray-300">
+                  Bizning intuitiv sürükle-va-tashla quruvchimiz bilan maxsus
+                  so'rovnomalar yarating. Texnik ko'nikmalar talab qilinmaydi.
+                  Bir nechta savol turlaridan tanlang, media qo'shing va
+                  ko'rinishni muassasangiz brendiga mos ravishda sozlang.
+                </p>
+              </div>
+
+              <div class="feature-card glass-card rounded-2xl p-8 h-full">
+                <div class="flex justify-center mb-6 text-5xl feature-icon">
+                  <i class="bx bx-user"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4 text-center">
+                  Tezkor talaba kirishi
+                </h3>
+                <p class="text-gray-300">
+                  So'rovnomalarni elektron pochta, havola orqali yoki
+                  to'g'ridan-to'g'ri o'quv boshqaruv tizimingizga joylashtirib
+                  ulashing. Talabalar hisob yaratmasdan har qanday qurilmada
+                  so'rovnomalarga kira oladilar, bu yuqori ishtirok darajasini
+                  ta'minlaydi.
+                </p>
+              </div>
+
+              <div class="feature-card glass-card rounded-2xl p-8 h-full">
+                <div class="flex justify-center mb-6 text-5xl feature-icon">
+                  <i class="bx bx-stats"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4 text-center">
+                  Real vaqt natijalari
+                </h3>
+                <p class="text-gray-300">
+                  Javoblarni kelishi bilanoq ko'ring va bir necha marta bosish
+                  bilan keng qamrovli hisobotlar yarating. Tendentsiyalarni
+                  tahlil qiling, turli guruhlar bo'yicha natijalarni
+                  solishtiring va ma'lumotlarni keyingi tahlil uchun turli
+                  formatlarda eksport qiling.
+                </p>
+              </div>
+
+              <div class="feature-card glass-card rounded-2xl p-8 h-full">
+                <div class="flex justify-center mb-6 text-5xl feature-icon">
+                  <i class="bx bx-shield-quarter"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4 text-center">
+                  Admin nazorati
+                </h3>
+                <p class="text-gray-300">
+                  Foydalanuvchi huquqlarini boshqaring, so'rovnomalarni
+                  kuzating, shablonlar yarating va siyosatlarni joriy qiling.
+                  Kafedra darajasidagi kirishni o'rnating, so'rovnoma
+                  shablonlarini yarating va barcha so'rovnomalarda muassasa
+                  siyosatlarini amalga oshiring.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-primary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+          <div
+            class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+        </section>
+
+        <section id="resources" class="py-24 relative overflow-hidden">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-16"
+            >
+              <div class="w-full md:w-1/2 order-2 md:order-1">
+                <div class="relative">
+                  <div
+                    class="absolute -inset-1 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl blur-xl opacity-30"
+                  ></div>
+                  <div class="gradient-border rounded-2xl">
+                    <img
+                      src="https://static.akadem.uz/crop/2/1/1200__85_2114936773.jpg?t=1702507567"
+                      alt="Educational resources"
+                      class="rounded-2xl shadow-xl w-full"
+                    />
+                  </div>
+
+                  <div
+                    class="absolute -top-6 right-12 glass-card p-4 rounded-xl shadow-lg animate-float"
+                    style="animation-delay: 1s"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center text-white"
+                      >
+                        <i class="bx bx-line-chart text-xl"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium">Javoblar</p>
+                        <p class="text-xs text-gray-400">+27% o'sish</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="absolute -bottom-6 left-12 glass-card p-4 rounded-xl shadow-lg animate-float"
+                    style="animation-delay: 2s"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white"
+                      >
+                        <i class="bx bx-user-check text-xl"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium">Foydalanuvchilar</p>
+                        <p class="text-xs text-gray-400">10,000+ o'qituvchi</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full md:w-1/2 order-1 md:order-2 space-y-6">
+                <span
+                  class="inline-block px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800"
+                >
+                  ISHONCHLI PLATFORMA
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold">
+                  Butun dunyo
+                  <span class="gradient-text">o'qituvchilari</span> ishonadi
+                </h2>
+                <p class="text-lg text-gray-300">
+                  O'quv materiallarini va talabalar tajribasini yaxshilash uchun
+                  platformamizdan foydalanadigan minglab ta'lim muassasalariga
+                  qo'shiling.
+                </p>
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <div
+                      class="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                    >
+                      <svg
+                        class="h-3 w-3 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <p>500 dan ortiq ta'lim muassasalari foydalanadi</p>
+                  </li>
+                  <li class="flex items-start">
+                    <div
+                      class="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                    >
+                      <svg
+                        class="h-3 w-3 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <p>GDPR talablariga javob beradi va xavfsiz</p>
+                  </li>
+                  <li class="flex items-start">
+                    <div
+                      class="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                    >
+                      <svg
+                        class="h-3 w-3 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <p>Mashhur LMS platformalari bilan integratsiya qilingan</p>
+                  </li>
+                  <li class="flex items-start">
+                    <div
+                      class="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                    >
+                      <svg
+                        class="h-3 w-3 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <p>Ta'lim foydalanuvchilari uchun maxsus yordam</p>
+                  </li>
+                </ul>
+                <button
+                  class="btn-gradient px-8 py-3 rounded-full text-white font-medium mt-6"
+                >
+                  Demo so'rash
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-1/3 right-0 w-96 h-96 bg-primary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+          <div
+            class="absolute bottom-1/3 left-0 w-96 h-96 bg-secondary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+        </section>
+
+        <section
+          id="pricing"
+          class="pricing-gradient py-24 relative overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+              <span
+                class="inline-block px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800 mb-4"
+              >
+                NARXLASH
+              </span>
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Narxlash <span class="gradient-text">rejalarimiz</span>
+              </h2>
+              <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                Har qanday o'lchamdagi ta'lim muassasalari uchun moslashtirilgan
+                narxlash rejalari.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="pricing-card glass-card rounded-2xl overflow-hidden">
+                <div class="p-8">
+                  <div class="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 class="text-xl font-bold">Asosiy</h3>
+                      <p class="text-gray-400 mt-1">
+                        Kichik o'qituvchilar uchun
+                      </p>
+                    </div>
+                    <span
+                      class="px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800"
+                    >
+                      Boshlovchilar
+                    </span>
+                  </div>
+                  <div class="flex items-baseline mb-6">
+                    <span class="text-4xl font-bold">$9</span>
+                    <span class="text-gray-400 ml-2">/ oyiga</span>
+                  </div>
+                  <ul class="space-y-4 mb-8">
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">10 ta so'rovnoma</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">100 ta javob</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Asosiy hisobotlar</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Email yordam</p>
+                    </li>
+                  </ul>
+                  <button
+                    class="w-full btn-gradient px-4 py-3 rounded-full text-white font-medium"
+                  >
+                    Boshlash
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="pricing-card pricing-popular rounded-2xl overflow-hidden transform scale-105"
+              >
+                <div
+                  class="absolute top-0 right-0 bg-gradient-to-r from-primary-600 to-secondary-600 text-white text-xs font-bold px-4 py-1 rounded-bl-lg"
+                >
+                  ENG MASHHUR
+                </div>
+                <div class="p-8">
+                  <div class="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 class="text-xl font-bold">Professional</h3>
+                      <p class="text-gray-400 mt-1">
+                        Kichik va o'rta maktablar uchun
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-baseline mb-6">
+                    <span class="text-4xl font-bold">$29</span>
+                    <span class="text-gray-400 ml-2">/ oyiga</span>
+                  </div>
+                  <ul class="space-y-4 mb-8">
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Cheksiz so'rovnomalar</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">1,000 ta javob</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Keng qamrovli hisobotlar</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Ustuvor yordam</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">LMS integratsiyasi</p>
+                    </li>
+                  </ul>
+                  <button
+                    class="w-full btn-gradient px-4 py-3 rounded-full text-white font-medium"
+                  >
+                    Boshlash
+                  </button>
+                </div>
+              </div>
+
+              <div class="pricing-card glass-card rounded-2xl overflow-hidden">
+                <div class="p-8">
+                  <div class="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 class="text-xl font-bold">Korporativ</h3>
+                      <p class="text-gray-400 mt-1">
+                        Katta maktablar va universitetlar uchun
+                      </p>
+                    </div>
+                    <span
+                      class="px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800"
+                    >
+                      Keng qamrovli
+                    </span>
+                  </div>
+                  <div class="flex items-baseline mb-6">
+                    <span class="text-4xl font-bold">$99</span>
+                    <span class="text-gray-400 ml-2">/ oyiga</span>
+                  </div>
+                  <ul class="space-y-4 mb-8">
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Cheksiz so'rovnomalar</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Cheksiz javoblar</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Maxsus hisobotlar</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">24/7 yordam</p>
+                    </li>
+                    <li class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center mr-3"
+                      >
+                        <svg
+                          class="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-gray-300">Maxsus integratsiyalar</p>
+                    </li>
+                  </ul>
+                  <button
+                    class="w-full btn-gradient px-4 py-3 rounded-full text-white font-medium"
+                  >
+                    Boshlash
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-0 left-1/3 w-96 h-96 bg-primary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+          <div
+            class="absolute bottom-0 right-1/3 w-96 h-96 bg-secondary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+        </section>
+
+        <section class="py-24 relative overflow-hidden">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+              <span
+                class="inline-block px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800 mb-4"
+              >
+                MIJOZLAR FIKRI
+              </span>
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Mijozlarimiz <span class="gradient-text">nima deyishadi</span>
+              </h2>
+              <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                Platformamizdan foydalanayotgan o'qituvchilar va ta'lim
+                muassasalari fikrlari.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="glass-card rounded-2xl p-8">
+                <div class="flex items-center gap-4 mb-6">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    class="w-12 h-12 rounded-full"
+                    alt="User"
+                  />
+                  <div>
+                    <h4 class="font-medium">Aziza Karimova</h4>
+                    <p class="text-sm text-gray-400">
+                      Toshkent Davlat Universiteti
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-300 mb-4">
+                  "So'rovEdu platformasi mening darslarimni yanada samarali
+                  qilishga yordam berdi. Talabalardan tezkor fikr-mulohaza olish
+                  imkoniyati juda qimmatli."
+                </p>
+                <div class="flex text-yellow-400">
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                </div>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8">
+                <div class="flex items-center gap-4 mb-6">
+                  <img
+                    src="https://randomuser.me/api/portraits/men/86.jpg"
+                    class="w-12 h-12 rounded-full"
+                    alt="User"
+                  />
+                  <div>
+                    <h4 class="font-medium">Bobur Aliyev</h4>
+                    <p class="text-sm text-gray-400">
+                      Samarqand Davlat Universiteti
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-300 mb-4">
+                  "Platformaning foydalanish qulayligi va hisobotlarning vizual
+                  ko'rinishi menga juda yoqdi. Endi o'quv jarayonini yaxshilash
+                  uchun ma'lumotlarga asoslangan qarorlar qabul qilishim
+                  mumkin."
+                </p>
+                <div class="flex text-yellow-400">
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star-half"></i>
+                </div>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8">
+                <div class="flex items-center gap-4 mb-6">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/24.jpg"
+                    class="w-12 h-12 rounded-full"
+                    alt="User"
+                  />
+                  <div>
+                    <h4 class="font-medium">Nilufar Rahimova</h4>
+                    <p class="text-sm text-gray-400">
+                      Buxoro Davlat Universiteti
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-300 mb-4">
+                  "So'rovEdu bizning universitetimizda o'quv jarayonini
+                  baholashning asosiy vositasiga aylandi. Texnik yordam jamoasi
+                  har doim yordam berishga tayyor."
+                </p>
+                <div class="flex text-yellow-400">
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                  <i class="bx bxs-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-1/4 right-0 w-96 h-96 bg-primary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+          <div
+            class="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+        </section>
+
+        <section
+          id="contact"
+          class="hero-gradient py-24 relative overflow-hidden"
+        >
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+              <span
+                class="inline-block px-3 py-1 text-xs font-medium bg-primary-900/30 text-primary-400 rounded-full border border-primary-800 mb-4"
+              >
+                BOSHLASH VAQTI
+              </span>
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Ta'lim mazmunini
+                <span class="gradient-text">yaxshilashga</span> tayyormisiz?
+              </h2>
+              <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                Bugun so'rovnomalar yaratishni boshlang va o'quv
+                materiallaringizni yaxshilash uchun zarur fikr-mulohazalarni
+                to'plang.
+              </p>
+              <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <button
+                  id="contactRegisterBtn"
+                  class="btn-gradient px-8 py-3 rounded-full text-white font-medium"
+                >
+                  Bepul boshlash
+                </button>
+                <button class="btn-outline px-8 py-3 rounded-full font-medium">
+                  Sotuvlar bilan bog'lanish
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-primary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+          <div
+            class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-600 rounded-full filter blur-[150px] opacity-20"
+          ></div>
+        </section>
+      </main>
+
+      <footer class="bg-dark-900 text-white border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center gap-2 mb-4">
+                <div
+                  class="w-8 h-8 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center"
+                >
+                  <i class="bx bx-food-menu text-white"></i>
+                </div>
+                <span class="text-lg font-semibold gradient-text"
+                  >So'rovEdu</span
+                >
+              </div>
+              <p class="text-gray-400">
+                Samarali fikr-mulohazalar orqali o'qituvchilarga yaxshiroq
+                ta'lim tajribasini yaratishga imkon beradi.
+              </p>
+              <div class="flex space-x-4 mt-6">
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-900/30 transition-colors duration-300"
+                >
+                  <i
+                    class="bx bxl-facebook text-gray-400 hover:text-primary-400"
+                  ></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-900/30 transition-colors duration-300"
+                >
+                  <i
+                    class="bx bxl-twitter text-gray-400 hover:text-primary-400"
+                  ></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-900/30 transition-colors duration-300"
+                >
+                  <i
+                    class="bx bxl-instagram text-gray-400 hover:text-primary-400"
+                  ></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 rounded-full bg-dark-800 flex items-center justify-center hover:bg-primary-900/30 transition-colors duration-300"
+                >
+                  <i
+                    class="bx bxl-linkedin text-gray-400 hover:text-primary-400"
+                  ></i>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4 text-lg">Mahsulot</h3>
+              <div class="flex flex-col gap-3">
+                <a
+                  href="#features"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Xususiyatlar
+                </a>
+                <a
+                  href="#pricing"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Narxlar
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Integratsiyalar
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Ko'p so'raladigan savollar
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4 text-lg">Resurslar</h3>
+              <div class="flex flex-col gap-3">
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Blog
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Hujjatlar
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Qo'llanmalar
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Yordam
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4 text-lg">Kompaniya</h3>
+              <div class="flex flex-col gap-3">
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Biz haqimizda
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Karyera
+                </a>
+                <a
+                  href="#contact"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Aloqa
+                </a>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300"
+                >
+                  Maxfiylik
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-12 pt-8 border-t border-white/5">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <p class="text-gray-500 text-sm">
+                © 2025 So'rovEdu. Barcha huquqlar himoyalangan.
+              </p>
+              <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="text-gray-500 hover:text-white text-sm">
+                  Xizmat ko'rsatish shartlari
+                </a>
+                <a href="#" class="text-gray-500 hover:text-white text-sm">
+                  Maxfiylik siyosati
+                </a>
+                <a href="#" class="text-gray-500 hover:text-white text-sm">
+                  Cookie siyosati
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <div
+        id="registrationModal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden"
+      >
+        <div
+          class="glass-card rounded-2xl p-8 max-w-md w-full mx-4 modal-animation"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold">Ro'yxatdan o'tish</h3>
+            <button id="closeModal" class="text-gray-400 hover:text-white">
+              <i class="bx bx-x text-2xl"></i>
+            </button>
+          </div>
+          <form id="registrationForm" class="space-y-4">
+            <div>
+              <label
+                for="fullName"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >To'liq ism</label
+              >
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <label
+                for="phone"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >Telefon raqami</label
+              >
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >Parol</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <label
+                for="confirmPassword"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >Parolni tasdiqlang</label
+              >
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div class="flex items-start">
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                required
+                class="mt-1 mr-2"
+              />
+              <label for="terms" class="text-sm text-gray-300">
+                Men
+                <a href="#" class="text-primary-400 hover:underline"
+                  >foydalanish shartlari</a
+                >
+                va
+                <a href="#" class="text-primary-400 hover:underline"
+                  >maxfiylik siyosati</a
+                >ga roziman
+              </label>
+            </div>
+            <button
+              type="submit"
+              class="w-full btn-gradient px-4 py-3 rounded-full text-white font-medium"
+            >
+              Ro'yxatdan o'tish
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Success Modal -->
+      <div
+        id="successModal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden"
+      >
+        <div
+          class="glass-card rounded-2xl p-8 max-w-md w-full mx-4 success-animation"
+        >
+          <div class="text-center">
+            <div
+              class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-green-600 mb-6"
+            >
+              <i class="bx bx-check text-4xl text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">
+              Ro'yxatdan o'tish muvaffaqiyatli!
+            </h3>
+            <p class="text-gray-300 mb-6">
+              Sizning ma'lumotlaringiz muvaffaqiyatli yuborildi. Tez orada siz
+              bilan bog'lanamiz.
+            </p>
+            <button
+              id="closeSuccessModal"
+              class="btn-gradient px-6 py-2 rounded-full text-white"
+            >
+              Yopish
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Modal -->
+      <div
+        id="loginModal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden"
+      >
+        <div
+          class="glass-card rounded-2xl p-8 max-w-md w-full mx-4 modal-animation"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold">Kirish</h3>
+            <button id="closeLoginModal" class="text-gray-400 hover:text-white">
+              <i class="bx bx-x text-2xl"></i>
+            </button>
+          </div>
+          <form id="loginForm" class="space-y-4">
+            <div>
+              <label
+                for="loginEmail"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="loginEmail"
+                name="loginEmail"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <label
+                for="loginPassword"
+                class="block text-sm font-medium text-gray-300 mb-1"
+                >Parol</label
+              >
+              <input
+                type="password"
+                id="loginPassword"
+                name="loginPassword"
+                required
+                class="w-full px-4 py-2 form-input rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  name="remember"
+                  class="mr-2"
+                />
+                <label for="remember" class="text-sm text-gray-300"
+                  >Meni eslab qol</label
+                >
+              </div>
+              <a href="#" class="text-sm text-primary-400 hover:underline"
+                >Parolni unutdingizmi?</a
+              >
+            </div>
+            <button
+              type="submit"
+              class="w-full btn-gradient px-4 py-3 rounded-full text-white font-medium"
+            >
+              Kirish
+            </button>
+          </form>
+          <div class="mt-4 text-center">
+            <p class="text-sm text-gray-300">
+              Hisobingiz yo'qmi?
+              <button
+                id="switchToRegister"
+                class="text-primary-400 hover:underline"
+              >
+                Ro'yxatdan o'ting
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </body>
 </html>
